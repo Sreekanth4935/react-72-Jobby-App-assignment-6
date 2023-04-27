@@ -1,0 +1,108 @@
+.bg-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Roboto';
+  background-color: #000000;
+  color: #ffff;
+}
+@media screen and (min-width: 768px) {
+  .bg-container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+.login-form-container {
+  background-color: #121212;
+  /* min-width: 80%; */
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+@media screen and (min-width: 768px) {
+  .login-form-container {
+    width: 40%;
+  }
+}
+
+.website-logo-container {
+  text-align: center;
+}
+.logo {
+  height: 30px;
+  margin-bottom: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    height: 50px;
+  }
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.input-label {
+  font-family: 'Roboto';
+  padding-bottom: 5px;
+  font-size: 13px;
+}
+
+.username-input-field {
+  font-size: 14px;
+  height: 40px;
+  border: 1px solid #7e858e;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 8px 16px 8px 16px;
+  outline: none;
+  color: #f1f5f9;
+}
+.password-input-field {
+  font-size: 14px;
+  height: 40px;
+  border: 1px solid #7e858e;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 8px 16px 8px 16px;
+  outline: none;
+  color: #f1f5f9;
+}
+.submit-button {
+  background-color: #4f46e5;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 8px 16px 8px 16px;
+  color: #f1f5f9;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+@media screen and (min-width: 768px) {
+  .login-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .submit-button {
+    width: 100px;
+    min-width: 25%;
+    margin-top: 50px;
+  }
+}
+.error-msg {
+  color: red;
+}
