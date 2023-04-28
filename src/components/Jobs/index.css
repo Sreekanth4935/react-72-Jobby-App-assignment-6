@@ -1,0 +1,117 @@
+.jobs-container {
+  background-color: #000000;
+  min-height: 100vh;
+  font-family: 'Roboto';
+}
+.jobs-second-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  flex-direction: center;
+  padding: 20px;
+}
+.input-search-box {
+  padding: 15px;
+  outline: none;
+  border: 0;
+  background-color: transparent;
+
+  border-radius: 5px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: aliceblue;
+  width: 100%;
+  border-right: 0;
+  height: 40px;
+}
+
+.search-icon {
+  color: #f1f5f9;
+  width: 40px;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #475569;
+  border-left: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.search-container {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border: solid 1px #7e858e;
+}
+@media screen and (max-width: 768px) {
+  .search-container {
+    display: flex;
+  }
+}
+.profile-details-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  height: 250px;
+  background-size: cover;
+  /* color: red; */
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+.failure-profile-details-container {
+  height: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.profile-img {
+  margin-top: 20px;
+}
+.profile-name {
+  color: #6366f1;
+  font-size: 25px;
+}
+.bio {
+  line-height: 2;
+  font-family: 'Roboto';
+}
+.hr-line {
+  border-color: #475569;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.failure-button {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border-radius: 5px;
+  width: 80px;
+  padding: 10px;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+.employment-name {
+  color: #f8fafc;
+  font-size: 18px;
+}
+.one {
+  color: #ffffff;
+}
+.ul-container {
+  list-style-type: none;
+  color: #ffffff;
+  padding-left: 0;
+  line-height: 2;
+  font-family: 'Roboto';
+}
+.label {
+  margin-right: 15px;
+  cursor: pointer;
+  outline: none;
+}
+.label-text-radio {
+  margin-left: 10px;
+}
