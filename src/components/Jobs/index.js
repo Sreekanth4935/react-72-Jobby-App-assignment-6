@@ -101,7 +101,6 @@ class Jobs extends Component {
         rating: eachJob.rating,
         title: eachJob.title,
       }))
-      //   console.log(jobs)
     }
   }
 
