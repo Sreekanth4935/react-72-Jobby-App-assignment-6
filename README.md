@@ -9,7 +9,13 @@ In this project, let's build a **Jobby App** by applying the concepts we have le
 </div>
 <br/>
 
+https://user-images.githubusercontent.com/37910008/234881265-0b72e657-8442-4e3c-b58f-148464a3621d.mp4
+
 **Failure View** <br/>
+
+
+https://user-images.githubusercontent.com/37910008/234881420-02b07ebd-c127-480f-9773-0084a40c4e48.mp4
+
 
 <div style="text-align: center;">
   <video style="max-width:80%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12);outline:none;" loop="true" autoplay="autoplay" controls="controls" muted>
