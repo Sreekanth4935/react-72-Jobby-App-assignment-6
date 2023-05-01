@@ -80,6 +80,7 @@ class Jobs extends Component {
       activeEmploymentLabelId,
       activeSalaryRadioId,
       searchInput,
+      employmentTypesList,
     } = this.state
 
     const jwtToken = Cookies.get('jwt_token')
@@ -194,6 +195,12 @@ class Jobs extends Component {
     this.setState({searchInput: event.target.value})
   }
 
+  updateSearchedValue = () => {
+    const {searchInput} = this.state
+    // console.log(searchInput, 'working')
+    this.setState({searchInput}, this.getJobsDetails)
+  }
+
   getProfileDetails = async () => {
     const {profileDetailsSuccessObject} = this.state
 
@@ -303,12 +310,30 @@ class Jobs extends Component {
     const {activeEmploymentLabelId, arr, employmentTypesList} = this.state
 
     const updatedList = employmentTypesList.map(eachEmploy => {
-      if (eachEmploy.id === event.target.id) {
+      if (eachEmploy.employmentTypeId === event.target.id) {
         return {...eachEmploy, isSelected: !eachEmploy.isSelected}
       }
-      return {...eachEmploy}
+      return eachEmploy
     })
-    console.log(updatedList)
+
+    const checkBoxFilter = updatedList.filter(eachEmployee => {
+      if (eachEmployee.isSelected === true) {
+        return eachEmployee.employmentTypeId
+      }
+      return null
+    })
+
+    const filterString = checkBoxFilter.map(
+      eachEmploy => eachEmploy.employmentTypeId,
+    )
+
+    this.setState(
+      {
+        activeEmploymentLabelId: filterString.join(),
+        employmentTypesList: updatedList,
+      },
+      this.getJobsDetails,
+    )
   }
 
   getActiveRadioLabelId = event => {
@@ -316,7 +341,7 @@ class Jobs extends Component {
       {
         activeSalaryRadioId: event.target.id,
       },
-      //   this.getProfileDetails,
+      this.getJobsDetails,
     )
   }
 
@@ -383,13 +408,16 @@ class Jobs extends Component {
           <div className="jobs-second-top">
             <div className="search-container">
               <input
-                type="text"
+                type="search"
                 className="input-search-box"
                 placeholder="Search"
                 onChange={this.onChangeInputSearch}
                 value={searchInput}
               />
-              <BsSearch className="search-icon" />
+              <BsSearch
+                className="search-icon"
+                onClick={this.updateSearchedValue}
+              />
             </div>
             {this.renderProfileDetails()}
             {this.renderCheckboxEmployment()}
@@ -399,13 +427,16 @@ class Jobs extends Component {
             <div>
               <div className="search-container2">
                 <input
-                  type="text"
+                  type="search"
                   className="input-search-box2"
                   placeholder="Search"
                   onChange={this.onChangeInputSearch}
                   value={searchInput}
                 />
-                <BsSearch className="search-icon" />
+                <BsSearch
+                  className="search-icon"
+                  onClick={this.updateSearchedValue}
+                />
               </div>
               {this.renderJobItemDetails()}
             </div>

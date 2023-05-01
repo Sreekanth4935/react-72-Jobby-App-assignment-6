@@ -34,15 +34,23 @@ const JobItem = props => {
         </div>
       </div>
       <div className="bottom">
-        <div className="location-container margin">
-          <MdLocationOn />
-          <p className="location-text">{location}</p>
+        <div className="bottom1">
+          <div className="location-container margin">
+            <MdLocationOn />
+            <p className="location-text">{location}</p>
+          </div>
+          <div className="location-container">
+            <BsBriefcaseFill />
+            <p className="location-text">{employmentType}</p>
+          </div>
         </div>
-        <div className="location-container">
-          <BsBriefcaseFill />
-          <p className="location-text">{employmentType}</p>
-        </div>
+        <p>{packagePerAnnum}</p>
       </div>
+      <div>
+        <hr className="hr-line1" />
+      </div>
+      <h1 className="desc">Description</h1>
+      <p className="job-description">{jobDescription}</p>
     </li>
   )
 }
