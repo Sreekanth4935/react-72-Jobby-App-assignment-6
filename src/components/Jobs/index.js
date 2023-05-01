@@ -2,26 +2,31 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
+import JobItem from '../JobItem'
 import Header from '../Header'
 import './index.css'
 // import { each } from 'immer/dist/internal'
 
-const employmentTypesList = [
+const initialEmploymentTypesList = [
   {
     label: 'Full Time',
     employmentTypeId: 'FULLTIME',
+    isSelected: false,
   },
   {
     label: 'Part Time',
     employmentTypeId: 'PARTTIME',
+    isSelected: false,
   },
   {
     label: 'Freelance',
     employmentTypeId: 'FREELANCE',
+    isSelected: false,
   },
   {
     label: 'Internship',
     employmentTypeId: 'INTERNSHIP',
+    isSelected: false,
   },
 ]
 
@@ -49,15 +54,19 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
+  emptyJobs: 'EMPTY_JOBS',
 }
 
 class Jobs extends Component {
   state = {
     activeEmploymentLabelId: '',
+    employmentTypesList: initialEmploymentTypesList,
+    arr: [],
     activeSalaryRadioId: '',
     searchInput: '',
     profileApiStatus: apiStatusConstants.initial,
     jobsApiStatus: apiStatusConstants.initial,
+    jobItemsSuccessObject: {},
     profileDetailsSuccessObject: {},
   }
 
@@ -101,7 +110,80 @@ class Jobs extends Component {
         rating: eachJob.rating,
         title: eachJob.title,
       }))
+      if (jobs.length === 0) {
+        this.setState({
+          jobsApiStatus: apiStatusConstants.emptyJobs,
+        })
+      } else {
+        this.setState({
+          jobItemsSuccessObject: jobs,
+          jobsApiStatus: apiStatusConstants.success,
+        })
+      }
+    } else {
+      this.setState({
+        jobsApiStatus: apiStatusConstants.failure,
+      })
     }
+  }
+
+  jobsApiSuccessShow = () => {
+    const {jobItemsSuccessObject} = this.state
+
+    return (
+      <div>
+        <ul className="ul-container1">
+          {jobItemsSuccessObject.map(eachJob => (
+            <JobItem eachJob={eachJob} key={eachJob.id} />
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  noJobsFound = () => (
+    <div className="jobs-failure-view-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+        alt="no jobs"
+        className="jobs-failure-view-image"
+      />
+      <h1 className="failure-text">No Jobs Found</h1>
+      <p className="failure-text">
+        We could not find any jobs. Try other filters.
+      </p>
+    </div>
+  )
+
+  onClickJobReset = () => {
+    // console.log('i
+    this.getJobsDetails()
+  }
+
+  jobsApiFailureView = () => {
+    const {jobItemsSuccessObject} = this.state
+
+    return (
+      <div className="jobs-failure-view-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+          alt="failure view"
+          className="jobs-failure-view-image"
+        />
+        <h1 className="failure-text">Oops! Something Went Wrong</h1>
+        <p className="failure-text">
+          We cannot seem to find the page you are looking for
+        </p>
+
+        <button
+          onClick={this.onClickJobReset}
+          type="button"
+          className="failure-retry-button"
+        >
+          Retry
+        </button>
+      </div>
+    )
   }
 
   onClickProfileReset = () => {
@@ -200,13 +282,33 @@ class Jobs extends Component {
     }
   }
 
+  renderJobItemDetails = () => {
+    const {jobsApiStatus} = this.state
+    switch (jobsApiStatus) {
+      case apiStatusConstants.emptyJobs:
+        return this.noJobsFound()
+      case apiStatusConstants.success:
+        return this.jobsApiSuccessShow()
+      case apiStatusConstants.failure:
+        return this.jobsApiFailureView()
+      default:
+        return null
+    }
+  }
+
   getActiveLabelInput = event => {
     // console.log(event.target.value)
     // console.log(event.target.type)
     // console.log(event.target.id)
-    this.setState({
-      activeEmploymentLabelId: event.target.id,
+    const {activeEmploymentLabelId, arr, employmentTypesList} = this.state
+
+    const updatedList = employmentTypesList.map(eachEmploy => {
+      if (eachEmploy.id === event.target.id) {
+        return {...eachEmploy, isSelected: !eachEmploy.isSelected}
+      }
+      return {...eachEmploy}
     })
+    console.log(updatedList)
   }
 
   getActiveRadioLabelId = event => {
@@ -219,7 +321,7 @@ class Jobs extends Component {
   }
 
   renderCheckboxEmployment = () => {
-    const {activeEmploymentLabelId} = this.state
+    const {activeEmploymentLabelId, employmentTypesList} = this.state
     return (
       <>
         <h1 className="employment-name">Type of Employment</h1>
@@ -233,9 +335,6 @@ class Jobs extends Component {
                   type="checkbox"
                   default="checked"
                   onChange={this.getActiveLabelInput}
-                  checked={
-                    eachLabel.employmentTypeId === activeEmploymentLabelId
-                  }
                 />
                 {eachLabel.label}
               </label>
@@ -281,19 +380,36 @@ class Jobs extends Component {
       <div className="jobs-container">
         <Header />
         <div className="jobs-second-container">
-          <div className="search-container">
-            <input
-              type="text"
-              className="input-search-box"
-              placeholder="Search"
-              onChange={this.onChangeInputSearch}
-              value={searchInput}
-            />
-            <BsSearch className="search-icon" />
+          <div className="jobs-second-top">
+            <div className="search-container">
+              <input
+                type="text"
+                className="input-search-box"
+                placeholder="Search"
+                onChange={this.onChangeInputSearch}
+                value={searchInput}
+              />
+              <BsSearch className="search-icon" />
+            </div>
+            {this.renderProfileDetails()}
+            {this.renderCheckboxEmployment()}
+            {this.renderRadioBoxSalary()}
           </div>
-          <div>{this.renderProfileDetails()}</div>
-          <div>{this.renderCheckboxEmployment()}</div>
-          <div>{this.renderRadioBoxSalary()}</div>
+          <div className="jobs-second-bottom">
+            <div>
+              <div className="search-container2">
+                <input
+                  type="text"
+                  className="input-search-box2"
+                  placeholder="Search"
+                  onChange={this.onChangeInputSearch}
+                  value={searchInput}
+                />
+                <BsSearch className="search-icon" />
+              </div>
+              {this.renderJobItemDetails()}
+            </div>
+          </div>
         </div>
       </div>
     )

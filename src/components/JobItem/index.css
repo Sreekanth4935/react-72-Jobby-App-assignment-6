@@ -1,0 +1,69 @@
+.company-image {
+  height: 70px;
+  width: 60px;
+  margin-right: 15px;
+  /* padding-top: 20px; */
+}
+.list-items {
+  color: #ffffffff;
+  background-color: #272727;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  /* border: solid 1px green; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .list-items {
+    width: 100%;
+    margin-left: 10px;
+  }
+}
+.top-one {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border: solid 1px green; */
+}
+.second-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.tittle {
+  line-height: 1;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.ratings {
+  padding-left: 5px;
+}
+.star {
+  color: #fbbf24;
+}
+.rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border: solid 1px gainsboro;
+  width: 50px; */
+}
+.location-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.location-text {
+  padding-left: 6px;
+}
+.margin {
+  margin-right: 15px;
+}
+.bottom {
+  display: flex;
+}
