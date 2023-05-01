@@ -1,0 +1,12 @@
+.each-job-detail-container {
+  min-height: 100vh;
+  background-color: #000000;
+  color: aliceblue;
+}
+.job-details-card {
+  margin: 15px;
+  /* border: solid 1px green; */
+  padding: 15px;
+  background-color: #272727;
+  border-radius: 8px;
+}

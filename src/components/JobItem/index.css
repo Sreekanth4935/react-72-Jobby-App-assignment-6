@@ -85,8 +85,16 @@
   font-family: 'Roboto';
   line-height: 1;
   color: #ffffff;
+  font-family: 'Roboto';
 }
 .job-description {
   color: #f1f5f9;
   margin-top: 0;
+  font-family: 'Roboto';
+}
+.link-item {
+  text-decoration: none;
+  color: #f1f5f9;
+  cursor: pointer;
+  outline: none;
 }
