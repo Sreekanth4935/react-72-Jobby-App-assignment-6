@@ -98,3 +98,6 @@
   cursor: pointer;
   outline: none;
 }
+.test-heading {
+  font-size: 15px;
+}

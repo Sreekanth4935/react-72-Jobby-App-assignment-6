@@ -24,11 +24,11 @@ const JobItem = props => {
         <div className="top-one">
           <img
             src={companyLogoUrl}
-            alt={employmentType}
+            alt="company logo"
             className="company-image"
           />
           <div className="second-one">
-            <p className="tittle">{title}</p>
+            <h1 className="tittle test-heading">{title}</h1>
             <div className="rating-container ">
               <AiTwotoneStar className="star" />
               <p className="ratings">{rating}</p>

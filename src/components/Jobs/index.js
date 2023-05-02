@@ -190,7 +190,6 @@ class Jobs extends Component {
 
   updateSearchedValue = () => {
     const {searchInput} = this.state
-    // console.log(searchInput, 'working')
     this.setState({searchInput}, this.getJobsDetails)
   }
 
@@ -256,13 +255,16 @@ class Jobs extends Component {
   )
 
   profileDetailsInProgress = () => (
-    <div className="failure-profile-details-container">
+    <div data-testid="loader" className="failure-profile-details-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
   jobsApiInprogressView = () => (
-    <div className="failure-profile-details-container to-center">
+    <div
+      data-testid="loader"
+      className="failure-profile-details-container to-center"
+    >
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )

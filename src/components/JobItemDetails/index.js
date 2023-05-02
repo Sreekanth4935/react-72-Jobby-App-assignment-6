@@ -118,11 +118,11 @@ class JobItemDetails extends Component {
               <div className="top-one">
                 <img
                   src={companyLogoUrl}
-                  alt={employmentType}
+                  alt="job details company logo"
                   className="company-image"
                 />
                 <div className="second-one">
-                  <p className="tittle">{title}</p>
+                  <h1 className="title test-heading">{title}</h1>
                   <div className="rating-container ">
                     <AiTwotoneStar className="star" />
                     <p className="ratings">{rating}</p>
@@ -237,7 +237,7 @@ class JobItemDetails extends Component {
   )
 
   profileDetailsInProgress = () => (
-    <div className="failure-profile-details-container">
+    <div data-testid="loader" className="failure-profile-details-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
