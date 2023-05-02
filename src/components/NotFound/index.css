@@ -1,0 +1,30 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: black;
+  min-height: 100vh;
+}
+.not-found-heading {
+  color: #ffffff;
+  font-family: 'Roboto';
+  text-align: center;
+}
+.not-found-para {
+  color: #ffffff;
+  text-align: center;
+}
+.not-found-image {
+  height: 400px;
+  /* width: 400px; */
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .not-found-image {
+    width: 400px;
+  }
+}
+.t1 {
+  text-align: center;
+}
