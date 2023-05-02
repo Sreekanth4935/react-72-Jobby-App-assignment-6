@@ -431,6 +431,7 @@ class Jobs extends Component {
                   value={searchInput}
                 />
                 <BsSearch
+                  data-testid="searchButton"
                   className="search-icon"
                   onClick={this.updateSearchedValue}
                 />
