@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 import {AiTwotoneStar} from 'react-icons/ai'
 import {MdLocationOn} from 'react-icons/md'
 import {BsBriefcaseFill} from 'react-icons/bs'
@@ -27,6 +28,10 @@ class JobItemDetails extends Component {
   }
 
   getEachJobDetails = async () => {
+    this.setState({
+      apiStatus: apiStatusConstants.inProgress,
+    })
+
     const {match} = this.props
     const {params} = match
     const {id} = params
@@ -94,7 +99,6 @@ class JobItemDetails extends Component {
       companyLogoUrl,
       companyWebsiteUrl,
       employmentType,
-      id,
       jobDescription,
       location,
       packagePerAnnum,
@@ -232,14 +236,23 @@ class JobItemDetails extends Component {
     </div>
   )
 
+  profileDetailsInProgress = () => (
+    <div className="failure-profile-details-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
   renderJobDetails = () => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.profileDetailsInProgress()
       case apiStatusConstants.success:
         return this.JobItemDetailsSuccessApi()
       case apiStatusConstants.failure:
         return this.JobItemDetailsFailureApi()
+
       default:
         return null
     }

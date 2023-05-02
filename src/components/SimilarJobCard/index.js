@@ -8,7 +8,6 @@ const SimilarJobCard = props => {
   const {
     companyLogoUrl,
     employmentType,
-    id,
     jobDescription,
     location,
     rating,

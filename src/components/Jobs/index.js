@@ -61,7 +61,6 @@ class Jobs extends Component {
   state = {
     activeEmploymentLabelId: '',
     employmentTypesList: initialEmploymentTypesList,
-    arr: [],
     activeSalaryRadioId: '',
     searchInput: '',
     profileApiStatus: apiStatusConstants.initial,
@@ -80,7 +79,6 @@ class Jobs extends Component {
       activeEmploymentLabelId,
       activeSalaryRadioId,
       searchInput,
-      employmentTypesList,
     } = this.state
 
     const jwtToken = Cookies.get('jwt_token')
@@ -157,35 +155,30 @@ class Jobs extends Component {
   )
 
   onClickJobReset = () => {
-    // console.log('i
     this.getJobsDetails()
   }
 
-  jobsApiFailureView = () => {
-    const {jobItemsSuccessObject} = this.state
+  jobsApiFailureView = () => (
+    <div className="jobs-failure-view-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="jobs-failure-view-image"
+      />
+      <h1 className="failure-text">Oops! Something Went Wrong</h1>
+      <p className="failure-text">
+        We cannot seem to find the page you are looking for
+      </p>
 
-    return (
-      <div className="jobs-failure-view-container">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-          alt="failure view"
-          className="jobs-failure-view-image"
-        />
-        <h1 className="failure-text">Oops! Something Went Wrong</h1>
-        <p className="failure-text">
-          We cannot seem to find the page you are looking for
-        </p>
-
-        <button
-          onClick={this.onClickJobReset}
-          type="button"
-          className="failure-retry-button"
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
+      <button
+        onClick={this.onClickJobReset}
+        type="button"
+        className="failure-retry-button"
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   onClickProfileReset = () => {
     this.getProfileDetails()
@@ -202,8 +195,6 @@ class Jobs extends Component {
   }
 
   getProfileDetails = async () => {
-    const {profileDetailsSuccessObject} = this.state
-
     this.setState({profileApiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/profile'
@@ -252,24 +243,26 @@ class Jobs extends Component {
     )
   }
 
-  profileDetailsFailure = () => {
-    const {profileApiStatus} = this.state
-
-    return (
-      <div className="failure-profile-details-container">
-        <button
-          type="button"
-          className="failure-button"
-          onClick={this.onClickProfileReset}
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
+  profileDetailsFailure = () => (
+    <div className="failure-profile-details-container">
+      <button
+        type="button"
+        className="failure-button"
+        onClick={this.onClickProfileReset}
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   profileDetailsInProgress = () => (
     <div className="failure-profile-details-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
+  jobsApiInprogressView = () => (
+    <div className="failure-profile-details-container to-center">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -292,6 +285,8 @@ class Jobs extends Component {
   renderJobItemDetails = () => {
     const {jobsApiStatus} = this.state
     switch (jobsApiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.jobsApiInprogressView()
       case apiStatusConstants.emptyJobs:
         return this.noJobsFound()
       case apiStatusConstants.success:
@@ -307,7 +302,7 @@ class Jobs extends Component {
     // console.log(event.target.value)
     // console.log(event.target.type)
     // console.log(event.target.id)
-    const {activeEmploymentLabelId, arr, employmentTypesList} = this.state
+    const {employmentTypesList} = this.state
 
     const updatedList = employmentTypesList.map(eachEmploy => {
       if (eachEmploy.employmentTypeId === event.target.id) {
@@ -346,7 +341,7 @@ class Jobs extends Component {
   }
 
   renderCheckboxEmployment = () => {
-    const {activeEmploymentLabelId, employmentTypesList} = this.state
+    const {employmentTypesList} = this.state
     return (
       <>
         <h1 className="employment-name">Type of Employment</h1>

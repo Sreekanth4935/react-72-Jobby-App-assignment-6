@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import {AiTwotoneStar} from 'react-icons/ai'
 import {MdLocationOn} from 'react-icons/md'
-import {BsSearch, BsBriefcaseFill} from 'react-icons/bs'
+import {BsBriefcaseFill} from 'react-icons/bs'
 
 import './index.css'
 
